@@ -1,5 +1,5 @@
 return {
   {
-    "tveskag/nvim-blame-line"
+    "tveskag/nvim-blame-line",
   },
 }

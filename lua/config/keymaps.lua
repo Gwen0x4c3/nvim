@@ -26,3 +26,11 @@ map("i", "<D-s>", "<Esc>:w<CR>a", { noremap = true, silent = true })
 
 -- Use cmd+w to close buffer
 map("n", "<D-w>", ":bd<CR>", { noremap = true, silent = true })
+
+-- Use cmd+j to open terminal like what ctrl+/ does
+vim.keymap.set("n", "<D-j>", "<cmd>lua require('snacks.terminal').toggle()<cr>", { desc = "Toggle Terminal" })
+vim.keymap.set("t", "<D-j>", "<cmd>lua require('snacks.terminal').toggle()<cr>", { desc = "Toggle Terminal" })
+
+-- accelerated-jk plugin settings
+vim.api.nvim_set_keymap("n", "j", "<Plug>(accelerated_jk_gj)", {})
+vim.api.nvim_set_keymap("n", "k", "<Plug>(accelerated_jk_gk)", {})
