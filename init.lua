@@ -21,20 +21,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
   end,
 })
 
--- clipboard settings
-local map = vim.keymap.set
--- Enable system clipboard access
-vim.opt.clipboard = "unnamedplus"
--- Override delete operations to use black hole register (don't affect clipboard)
-map({ "n", "v" }, "d", '"_d', { noremap = true })
-map({ "n", "v" }, "D", '"_D', { noremap = true })
-map({ "n", "v" }, "x", '"_x', { noremap = true })
-map({ "n", "v" }, "X", '"_X', { noremap = true })
-map("v", "c", '"_c', { noremap = true })
-map("v", "C", '"_C', { noremap = true })
-
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "gray", bold = false })
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#ffe5b4", bold = true })
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "gray", bold = false })
--- vim.api.nvim_set_hl(0, "Comment", { fg = "#daa520" })
 vim.api.nvim_set_hl(0, "Comment", { fg = "#87ceeb" })

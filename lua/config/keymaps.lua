@@ -34,3 +34,19 @@ vim.keymap.set("t", "<D-j>", "<cmd>lua require('snacks.terminal').toggle()<cr>",
 -- accelerated-jk plugin settings
 vim.api.nvim_set_keymap("n", "j", "<Plug>(accelerated_jk_gj)", {})
 vim.api.nvim_set_keymap("n", "k", "<Plug>(accelerated_jk_gk)", {})
+
+-- Enable system clipboard access
+vim.opt.clipboard = "unnamedplus"
+-- Override delete operations to use black hole register (don't affect clipboard)
+map({ "n", "v" }, "d", '"_d', { noremap = true })
+map({ "n", "v" }, "D", '"_D', { noremap = true })
+map({ "n", "v" }, "x", '"_x', { noremap = true })
+map({ "n", "v" }, "X", '"_X', { noremap = true })
+map("v", "c", '"_c', { noremap = true })
+map("v", "C", '"_C', { noremap = true })
+
+-- Map cmd+arrow keys to resize windows
+map("n", "<D-Up>", ":resize +2<CR>", { noremap = true, silent = true })
+map("n", "<D-Down>", ":resize -2<CR>", { noremap = true, silent = true })
+map("n", "<D-Left>", ":vertical resize -2<CR>", { noremap = true, silent = true })
+map("n", "<D-Right>", ":vertical resize +2<CR>", { noremap = true, silent = true })
