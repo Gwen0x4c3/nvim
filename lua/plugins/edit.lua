@@ -1,5 +1,9 @@
 return {
   {
+    "rainbowhxch/accelerated-jk.nvim",
+  },
+
+  {
     "numToStr/Comment.nvim",
     config = function()
       require("Comment").setup()
@@ -56,48 +60,73 @@ return {
 
   {
     "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    config = true,
+    event = "BufReadPost",
+    enabled = true,
+    opts = {
+      signcolumn = true,
+      numhl = false,
+      current_line_blame = true,
+      attach_to_untracked = true,
+      preview_config = {
+        border = "rounded",
+      },
+      on_attach = function(bufnr)
+        -- Toggles
+        require("snacks")
+          .toggle({
+            name = "line blame",
+            get = function()
+              return require("gitsigns.config").config.current_line_blame
+            end,
+            set = function(enabled)
+              require("gitsigns").toggle_current_line_blame(enabled)
+            end,
+          })
+          :map("<leader>gt")
+        require("snacks")
+          .toggle({
+            name = "word diff",
+            get = function()
+              return require("gitsigns.config").config.word_diff
+            end,
+            set = function(enabled)
+              require("gitsigns").toggle_word_diff(enabled)
+            end,
+          })
+          :map("<leader>gw")
+      end,
+    },
+    config = function(_, opts)
+      require("gitsigns").setup(opts)
+    end,
   },
 
   {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
+    "kosayoda/nvim-lightbulb",
+  },
+
+  {
+    "rachartier/tiny-code-action.nvim",
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    keys = {
-      { "<leader>H", "<cmd>lua require('harpoon'):list():add()<cr>", desc = "Harpoon File" },
+      { "nvim-lua/plenary.nvim" },
+      -- { "nvim-telescope/telescope.nvim" },
       {
-        "<leader>h",
-        "<cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<cr>",
-        desc = "Harpoon Quick Menu",
+        "folke/snacks.nvim",
+        opts = {
+          terminal = {},
+        },
       },
     },
-    config = function()
-      local harpoon = require("harpoon")
-      harpoon:setup()
-      local conf = require("telescope.config").values
-      local function toggle_telescope(harpoon_files)
-        local file_paths = {}
-        for _, item in ipairs(harpoon_files.items) do
-          table.insert(file_paths, item.value)
-        end
-        require("telescope.pickers")
-          .new({}, {
-            prompt_title = "Harpoon",
-            finder = require("telescope.finders").new_table({
-              results = file_paths,
-            }),
-            previewer = conf.file_previewer({}),
-            sorter = conf.generic_sorter({}),
-          })
-          :find()
-      end
-      vim.keymap.set("n", "<C-e>", function()
-        toggle_telescope(harpoon:list())
-      end, { desc = "Open harpoon window" })
-    end,
+    event = "LspAttach",
+    keys = {
+      {
+        "<leader>ca",
+        function()
+          require("tiny-code-action").code_action()
+        end,
+        desc = "Code Action",
+      },
+    },
+    opts = {},
   },
 }

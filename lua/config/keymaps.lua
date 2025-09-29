@@ -27,14 +27,6 @@ map("i", "<D-s>", "<Esc>:w<CR>a", { noremap = true, silent = true })
 -- Use cmd+w to close buffer
 map("n", "<D-w>", ":bd<CR>", { noremap = true, silent = true })
 
--- Use cmd+j to open terminal like what ctrl+/ does
-vim.keymap.set("n", "<D-j>", "<cmd>lua require('snacks.terminal').toggle()<cr>", { desc = "Toggle Terminal" })
-vim.keymap.set("t", "<D-j>", "<cmd>lua require('snacks.terminal').toggle()<cr>", { desc = "Toggle Terminal" })
-
--- accelerated-jk plugin settings
-vim.api.nvim_set_keymap("n", "j", "<Plug>(accelerated_jk_gj)", {})
-vim.api.nvim_set_keymap("n", "k", "<Plug>(accelerated_jk_gk)", {})
-
 -- Enable system clipboard access
 vim.opt.clipboard = "unnamedplus"
 -- Override delete operations to use black hole register (don't affect clipboard)
@@ -50,3 +42,12 @@ map("n", "<D-Up>", ":resize +2<CR>", { noremap = true, silent = true })
 map("n", "<D-Down>", ":resize -2<CR>", { noremap = true, silent = true })
 map("n", "<D-Left>", ":vertical resize -2<CR>", { noremap = true, silent = true })
 map("n", "<D-Right>", ":vertical resize +2<CR>", { noremap = true, silent = true })
+
+-- ========= Plugins Keymaps =========
+-- accelerated-jk plugin settings
+vim.api.nvim_set_keymap("n", "j", "<Plug>(accelerated_jk_gj)", {})
+vim.api.nvim_set_keymap("n", "k", "<Plug>(accelerated_jk_gk)", {})
+
+-- Use cmd+j to open terminal
+vim.keymap.set("n", "<D-j>", "<cmd>lua require('snacks.terminal').toggle()<cr>", { desc = "Toggle Terminal" })
+vim.keymap.set("t", "<D-j>", "<cmd>lua require('snacks.terminal').toggle()<cr>", { desc = "Toggle Terminal" })
