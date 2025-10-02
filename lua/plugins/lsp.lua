@@ -1,11 +1,17 @@
 return {
-  -- LSP keymaps
   {
-    "neovim/nvim-lspconfig",
-    opts = function()
-      local keys = require("lazyvim.plugins.lsp.keymaps").get()
-      -- disable native code action and replace it with tiny-code-action.nvim
-      keys[#keys + 1] = { "<leader>ca", false }
-    end,
+    "linux-cultist/venv-selector.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } }, -- optional: you can also use fzf-lua, snacks, mini-pick instead.
+    },
+    ft = "python", -- Load when opening Python files
+    keys = {
+      -- { ",v", "<cmd>VenvSelect<cr>" }, -- Open picker on keymap
+    },
+    opts = { -- this can be an empty lua table - just showing below for clarity.
+      search = {}, -- if you add your own searches, they go here.
+      options = {}, -- if you add plugin options, they go here.
+    },
   },
 }

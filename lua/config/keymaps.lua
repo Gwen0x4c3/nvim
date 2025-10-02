@@ -20,12 +20,18 @@ map("i", "<A-Backspace>", "<C-w>", { noremap = true, silent = true })
 map("i", "<D-Backspace>", "<C-u>", { noremap = true, silent = true })
 map("n", "<D-Backspace>", "dd", { noremap = true, silent = true })
 
--- Use cmd+s to save buffer
-map("n", "<D-s>", ":w<CR>", { noremap = true, silent = true })
-map("i", "<D-s>", "<Esc>:w<CR>a", { noremap = true, silent = true })
+-- Use cmd+s to format changed lines, then save
+map("n", "<D-s>", ":DiffFormat<CR>:w<CR>", { noremap = true, silent = true })
+map("i", "<D-s>", "<Esc>:DiffFormat<CR>:w<CR>a", { noremap = true, silent = true })
+
+-- Use cmd+a to select all
+map("n", "<D-a>", "ggVG", { noremap = true, silent = true })
+map("i", "<D-a>", "<Esc>ggVG", { noremap = true, silent = true })
 
 -- Use cmd+w to close buffer
-map("n", "<D-w>", ":bd<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<D-w>", function()
+  require("snacks").bufdelete()
+end, { desc = "Close buffer" })
 
 -- Enable system clipboard access
 vim.opt.clipboard = "unnamedplus"

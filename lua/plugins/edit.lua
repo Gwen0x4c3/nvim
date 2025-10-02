@@ -64,7 +64,7 @@ return {
     enabled = true,
     opts = {
       signcolumn = true,
-      numhl = false,
+      numhl = true,
       current_line_blame = true,
       attach_to_untracked = true,
       preview_config = {
@@ -122,7 +122,13 @@ return {
       {
         "<leader>ca",
         function()
-          require("tiny-code-action").code_action()
+          -- Check if buffer is valid before calling the action
+          local bufnr = vim.api.nvim_get_current_buf()
+          if vim.api.nvim_buf_is_valid(bufnr) then
+            require("tiny-code-action").code_action()
+          else
+            print("Invalid buffer!")
+          end
         end,
         desc = "Code Action",
       },
