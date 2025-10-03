@@ -57,3 +57,18 @@ vim.api.nvim_set_keymap("n", "k", "<Plug>(accelerated_jk_gk)", {})
 -- Use cmd+j to open terminal
 vim.keymap.set("n", "<D-j>", "<cmd>lua require('snacks.terminal').toggle()<cr>", { desc = "Toggle Terminal" })
 vim.keymap.set("t", "<D-j>", "<cmd>lua require('snacks.terminal').toggle()<cr>", { desc = "Toggle Terminal" })
+
+-- Delete unchanged buffers (based on git status)
+map("n", "<leader>bu", function()
+  local bufs = vim.fn.getbufinfo({ buflisted = 1 })
+  for _, buf in ipairs(bufs) do
+    if buf.name ~= "" and vim.fn.getbufvar(buf.bufnr, "&modified") == 0 then
+      -- Check if file is unchanged in git
+      local cmd = "git diff --quiet " .. vim.fn.shellescape(buf.name) .. " 2>/dev/null"
+      local _ = vim.fn.system(cmd)
+      if vim.v.shell_error == 0 then
+        vim.cmd("bdelete " .. buf.bufnr)
+      end
+    end
+  end
+end, { desc = "Delete git unchanged buffers" })
