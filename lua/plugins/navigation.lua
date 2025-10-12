@@ -15,21 +15,22 @@ return {
     init = function()
       vim.g.loaded_netrwPlugin = 1
     end,
+
   },
 
-  {
-    "folke/snacks.nvim",
-    opts = {
-      picker = {
-        sources = {
-          files = {
-            hidden = true,
-            ignored = true,
-          },
-        },
-        hidden = true,
-        ignored = true,
-      },
-    },
-  },
+  -- {
+  --   "folke/snacks.nvim",
+  --   opts = {
+  --     picker = {
+  --       sources = {
+  --         files = {
+  --           hidden = true,
+  --           ignored = true,
+  --         },
+  --       },
+  --       hidden = true,
+  --       ignored = true,
+  --     },
+  --   },
+  -- },
 }

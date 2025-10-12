@@ -65,5 +65,7 @@ return {
     },
     opts = {},
   },
+
+  { 'wakatime/vim-wakatime', lazy = false }
 }
 
