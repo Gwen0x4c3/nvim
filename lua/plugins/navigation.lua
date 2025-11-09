@@ -18,6 +18,15 @@ return {
 
   },
 
+  -- Override LazyVim's default Snacks explorer keymap that remaps <leader>E
+  {
+    "folke/snacks.nvim",
+    optional = true,
+    keys = {
+      { "<leader>E", false },
+    },
+  },
+
   -- {
   --   "folke/snacks.nvim",
   --   opts = {

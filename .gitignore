@@ -16,3 +16,5 @@ data
 Session.vim
 .netrwhist
 .claude/
+.nvimlog
+.state/
