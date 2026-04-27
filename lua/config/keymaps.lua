@@ -21,8 +21,8 @@ map("i", "<D-Backspace>", "<C-u>", { noremap = true, silent = true })
 map("n", "<D-Backspace>", "dd", { noremap = true, silent = true })
 
 -- Use cmd+s to format changed lines, then save
-map("n", "<D-s>", ":DiffFormat<CR>:w<CR>", { noremap = true, silent = true })
-map("i", "<D-s>", "<Esc>:DiffFormat<CR>:w<CR>a", { noremap = true, silent = true })
+map("n", "<D-s>", ":FormatModifications<CR>:w<CR>", { noremap = true, silent = true })
+map("i", "<D-s>", "<Esc>:FormatModifications<CR>:w<CR>a", { noremap = true, silent = true })
 
 -- Use cmd+a to select all
 map("n", "<D-a>", "ggVG", { noremap = true, silent = true })
