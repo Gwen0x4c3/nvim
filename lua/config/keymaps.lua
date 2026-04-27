@@ -72,3 +72,9 @@ map("n", "<leader>bu", function()
     end
   end
 end, { desc = "Delete git unchanged buffers" })
+
+-- ~/.config/nvim/lua/config/keymaps.lua（或任意 keymap 配置）
+vim.keymap.set("n", "<leader>ge", function()
+  Snacks.picker.git_status()
+end, { desc = "Git Status" })
+

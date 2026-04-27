@@ -21,4 +21,31 @@ return {
     end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
+
+  -- ~/.config/nvim/lua/plugins/snacks.lua
+  {
+    "folke/snacks.nvim",
+    opts = {
+      picker = {
+        sources = {
+          explorer = {
+            hidden = true,
+            ignored = true,
+            git_status = true,
+            follow_file = true,
+          },
+        },
+        icons = {
+          git = {
+            enabled = true,
+            staged = "✓",
+            added = "+",
+            deleted = "-",
+            modified = "~",
+            untracked = "?",
+          },
+        },
+      },
+    },
+  }
 }
