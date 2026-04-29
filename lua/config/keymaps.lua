@@ -78,3 +78,5 @@ vim.keymap.set("n", "<leader>ge", function()
   Snacks.picker.git_status()
 end, { desc = "Git Status" })
 
+-- leader+rn to refactor
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)

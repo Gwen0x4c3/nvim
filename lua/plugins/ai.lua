@@ -67,7 +67,6 @@ return {
   --     { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
   --   },
   -- },
-
   {
     "https://code.byted.org/chenjiaqi.cposture/codeverse.vim.git",
     dependencies = {
@@ -87,7 +86,15 @@ return {
             cmd = { "coco" },
             title = "Coco AI",
           },
+          aiden = {
+            cmd = { "aiden" },
+            title = "Aiden CLI",
+          },
         },
+        mux = {
+          enabled = true,
+          backend = "tmux",
+        }
       },
     },
     keys = {

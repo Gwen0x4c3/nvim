@@ -2,7 +2,6 @@ return {
   -- {
   --   "tveskag/nvim-blame-line",
   -- },
-
   {
     "kdheepak/lazygit.nvim",
     cmd = {
@@ -13,7 +12,7 @@ return {
       "LazyGitFilterCurrentFile",
     },
     keys = {
-      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+      { "<leader>gg", "<cmd>LazyGit<cr>",            desc = "LazyGit" },
       { "<leader>gf", "<cmd>LazyGitCurrentFile<cr>", desc = "LazyGit current file" },
     },
   },
@@ -32,32 +31,40 @@ return {
       },
       on_attach = function(bufnr)
         require("snacks")
-          .toggle({
-            name = "line blame",
-            get = function()
-              return require("gitsigns.config").config.current_line_blame
-            end,
-            set = function(enabled)
-              require("gitsigns").toggle_current_line_blame(enabled)
-            end,
-          })
-          :map("<leader>gt")
+            .toggle({
+              name = "line blame",
+              get = function()
+                return require("gitsigns.config").config.current_line_blame
+              end,
+              set = function(enabled)
+                require("gitsigns").toggle_current_line_blame(enabled)
+              end,
+            })
+            :map("<leader>gt")
         require("snacks")
-          .toggle({
-            name = "word diff",
-            get = function()
-              return require("gitsigns.config").config.word_diff
-            end,
-            set = function(enabled)
-              require("gitsigns").toggle_word_diff(enabled)
-            end,
-          })
-          :map("<leader>gw")
+            .toggle({
+              name = "word diff",
+              get = function()
+                return require("gitsigns.config").config.word_diff
+              end,
+              set = function(enabled)
+                require("gitsigns").toggle_word_diff(enabled)
+              end,
+            })
+            :map("<leader>gw")
       end,
     },
     config = function(_, opts)
       require("gitsigns").setup(opts)
     end,
   },
+  {
+    "sindrets/diffview.nvim",
+    keys = {
+      { "<leader>gd", "<cmd>DiffviewOpen<cr>",          desc = "DiffView Open" },
+      { "<leader>gH", "<cmd>DiffviewFileHistory %<cr>", desc = "DiffView File History" },
+      { "<leader>gq", "<cmd>DiffviewClose<cr>",         desc = "DiffView Close" },
+    },
+  }
 }
 
