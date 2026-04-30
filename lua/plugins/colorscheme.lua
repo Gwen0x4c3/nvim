@@ -1,79 +1,91 @@
 return {
+  -- {
+  --   "scottmckendry/cyberdream.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   opts = {
+  --     transparent = true,
+  --     italic_comments = true,
+  --     borderless_pickers = false,
+  --   }
+  -- },
   {
-    "scottmckendry/cyberdream.nvim",
+    "catppuccin/nvim",
+    name = "catppuccin",
     lazy = false,
     priority = 1000,
-    opts = {
-      transparent = true,
-      italic_comments = true,
-      borderless_pickers = false,
-    }
-  },
-  -- Configure LazyVim to load gruvbox
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "cyberdream",
-    },
-  },
-
---   {
---     "catppuccin/nvim",
---     lazy = true,
---     name = "catppuccin",
---     opts = {
---       lsp_styles = {
---         underlines = {
---           errors = { "undercurl" },
---           hints = { "undercurl" },
---           warnings = { "undercurl" },
---           information = { "undercurl" },
---         },
---       },
---       integrations = {
---         aerial = true,
---         alpha = true,
---         cmp = true,
---         dashboard = true,
---         flash = true,
---         fzf = true,
---         grug_far = true,
---         gitsigns = true,
---         headlines = true,
---         illuminate = true,
---         indent_blankline = { enabled = true },
---         leap = true,
---         lsp_trouble = true,
---         mason = true,
---         mini = true,
---         navic = { enabled = true, custom_bg = "lualine" },
---         neotest = true,
---         neotree = true,
---         noice = true,
---         notify = true,
---         snacks = true,
---         telescope = true,
---         treesitter_context = true,
---         which_key = true,
---       },
---     },
---     specs = {
---       {
---         "akinsho/bufferline.nvim",
---         optional = true,
---         opts = function(_, opts)
---           if (vim.g.colors_name or ""):find("catppuccin") then
---             opts.highlights = require("catppuccin.special.bufferline").get_theme()
---           end
---         end,
---       },
---     },
---   },
---
---   {
---     "LazyVim/LazyVim",
---     opts = {
---       colorscheme = "catppuccin",
---     },
---   },
+    config = function()
+      require("catppuccin").setup({
+        flavour = "frappe", -- latte, frappe, macchiato, mocha
+        transparent_background = true,
+        term_colors = true,
+        dim_inactive = {
+          enabled = false, -- 禁用，避免冲突
+          shade = "dark",
+          percentage = 0.15,
+        },
+        custom_highlights = function(colors)
+          return {
+            NormalFloat = { bg = "NONE" },
+            FloatBorder = { bg = "NONE" },
+            FloatTitle = { bg = "NONE" },
+            NormalNC = { bg = "NONE" },
+            VertSplit = { bg = "NONE" },
+            WinSeparator = { bg = "NONE" },
+            SignColumn = { bg = "NONE" },
+            LineNr = { bg = "NONE" },
+            CursorLineNr = { bg = "NONE" },
+            DiagnosticSignError = { bg = "NONE" },
+            DiagnosticSignWarn = { bg = "NONE" },
+            DiagnosticSignInfo = { bg = "NONE" },
+            DiagnosticSignHint = { bg = "NONE" },
+            GitSignsAdd = { bg = "NONE" },
+            GitSignsChange = { bg = "NONE" },
+            GitSignsDelete = { bg = "NONE" },
+          }
+        end,
+        styles = {
+          comments = { "italic" },
+          conditionals = { "italic" },
+          loops = {},
+          functions = { "bold" },
+          keywords = { "bold" },
+          strings = {},
+          variables = {},
+          numbers = {},
+          booleans = {},
+          properties = {},
+          types = { "bold" },
+          operators = {},
+        },
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+          nvimtree = true,
+          treesitter = true,
+          notify = true,
+          mini = true,
+          telescope = { enabled = true },
+          which_key = true,
+          indent_blankline = { enabled = true },
+          native_lsp = {
+            enabled = true,
+            virtual_text = {
+              errors = { "italic" },
+              hints = { "italic" },
+              warnings = { "italic" },
+              information = { "italic" },
+            },
+            underlines = {
+              errors = { "undercurl" },
+              hints = { "undercurl" },
+              warnings = { "undercurl" },
+              information = { "undercurl" },
+            },
+          },
+        },
+      })
+      vim.cmd.colorscheme("catppuccin")
+    end,
+  }
 }
