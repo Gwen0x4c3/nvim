@@ -66,6 +66,33 @@ return {
     opts = {},
   },
 
-  { 'wakatime/vim-wakatime', lazy = false }
-}
+  { "wakatime/vim-wakatime", lazy = false },
 
+  {
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    config = function()
+      require("git-conflict").setup({
+        default_mappings = true, -- 启用默认快捷键
+        default_commands = true, -- 启用命令
+        disable_diagnostics = false,
+        highlights = {
+          incoming = "DiffAdd", -- 对方分支的改动高亮
+          current = "DiffText", -- 当前分支的改动高亮
+        },
+      })
+    end,
+  },
+
+  {
+    "kylechui/nvim-surround",
+    version = "^4.0.0", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    -- Optional: See `:h nvim-surround.configuration` and `:h nvim-surround.setup` for details
+    -- config = function()
+    --     require("nvim-surround").setup({
+    --         -- Put your configuration here
+    --     })
+    -- end
+  },
+}

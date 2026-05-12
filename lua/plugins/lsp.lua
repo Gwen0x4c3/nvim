@@ -14,4 +14,42 @@ return {
       options = {}, -- if you add plugin options, they go here.
     },
   },
+
+  -- Glance.nvim - 类似 GoLand Cmd+Y 的代码预览（定义/引用/类型定义）
+  {
+    "dnlhc/glance.nvim",
+    event = "LspAttach",
+    config = function()
+      require("glance").setup({
+        border = {
+          enable = true,
+          top_char = "▀",
+          bottom_char = "▄",
+        },
+        theme = {
+          enable = true,
+          mode = "dark_border",
+        },
+        folds = {
+          fold_closed = "",
+          fold_open = "",
+          folded = true,
+        },
+        mappings = {
+          list = {
+            ["<CR>"] = "jump",
+            ["o"] = "jump",
+            ["q"] = "close",
+            ["<Esc>"] = "close",
+          },
+        },
+      })
+    end,
+    keys = {
+      { "gp", "<cmd>Glance definitions<cr>", desc = "[Glance] Preview definitions" },
+      { "gP", "<cmd>Glance type_definitions<cr>", desc = "[Glance] Preview type definitions" },
+      { "gr", "<cmd>Glance references<cr>", desc = "[Glance] Preview references" },
+      { "gy", "<cmd>Glance implementations<cr>", desc = "[Glance] Preview implementations" },
+    },
+  },
 }
