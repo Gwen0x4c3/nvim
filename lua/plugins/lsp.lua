@@ -28,7 +28,7 @@ return {
         },
         theme = {
           enable = true,
-          mode = "dark_border",
+          mode = "auto",
         },
         folds = {
           fold_closed = "",
